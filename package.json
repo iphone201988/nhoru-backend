@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon",
-    "start": "concurrently -k -s first \"npm run build\" \"wait-on dist/server.js && node dist/server.js\"",
+    "start": "concurrently -s first --success last \"npm run build\" \"wait-on dist/server.js && node dist/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
