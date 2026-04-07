@@ -58,7 +58,7 @@ const loginAdmin = TryCatch(async (req: Request, res: Response) => {
 });
 
 const aiChat = TryCatch(async (req: Request, res: Response) => {
-  const metaData = await MetaData.findOne().select("systemPrompt");
+  const metaData = await MetaData.findOne().select("systemPrompt aiModel");
   const systemPrompt = metaData?.systemPrompt;
 
   if (!systemPrompt) throw new ErrorHandler("System prompt not found.", 404);
@@ -68,7 +68,7 @@ const aiChat = TryCatch(async (req: Request, res: Response) => {
 
   const endpoint =
     process.env.OPENAI_ENDPOINT || "https://api.openai.com/v1/chat/completions";
-  const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
+  const model = metaData?.aiModel || process.env.OPENAI_MODEL || "gpt-4o-mini";
 
   const response = await fetch(endpoint, {
     method: "POST",

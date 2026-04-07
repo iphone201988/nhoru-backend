@@ -17,6 +17,10 @@ const schema = new mongoose.Schema(
     idleResetSeconds: {
       type: Number,
     },
+    aiModel: {
+      type: String,
+      enum: ["gpt-4o-mini", "gpt-3.5-turbo"],
+    },
     systemPrompt: {
       type: String,
     },
